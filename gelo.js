@@ -38,6 +38,7 @@
     uniform2f : gl.uniform2f.bind(gl),
     uniform2i : gl.uniform2i.bind(gl),
     use_program : (p) => gl.useProgram(b[p]),
+    vertex_attrib_divisor : ext_ia.vertexAttribDivisorANGLE.bind(gl),
     vertex_attrib_pointer : gl.vertexAttribPointer.bind(gl),
     viewport : gl.viewport.bind(gl),
   };
