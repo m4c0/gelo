@@ -14,6 +14,7 @@ static constexpr const auto vert_shader = R"(
 static constexpr const auto frag_shader = R"(
   void main() { gl_FragColor = vec4(0.1, 0.2, 0.3, 1.0); }
 )"_s;
+static constexpr const float quad[] { 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0 };
 
 namespace gelo {
   constexpr const auto array_buffer = 34962;
@@ -25,9 +26,13 @@ namespace gelo {
   constexpr const auto vertex_shader = 35633;
 
   IMPORT(void, attach_shader)(int prog, int shd);
+  IMPORT(void, bind_buffer)(int type, int buf);
+  IMPORT(void, buffer_data)(int type, const void * ptr, unsigned sz, int mode);
   IMPORT(void, compile_shader)(int shd);
+  IMPORT(int, create_buffer)();
   IMPORT(int, create_program)();
   IMPORT(int, create_shader)(int type);
+  IMPORT(void, enable_vertex_attrib_array)(int idx);
   IMPORT(void, get_program_info_log)(int prog, char * buf, unsigned sz);
   IMPORT(bool, get_program_parameter_b)(int prog, int n);
   IMPORT(void, get_shader_info_log)(int shd, char * buf, unsigned sz);
@@ -35,6 +40,7 @@ namespace gelo {
   IMPORT(int, link_program)(int prog);
   IMPORT(void, shader_source)(int shd, const char * src, unsigned sz);
   IMPORT(int, use_program)(int prog);
+  IMPORT(void, vertex_attrib_array_pointer)(int idx, int qty, int type, bool norm, int stride, int offset);
 }
 
 static void shader(int prog, int type, jute::view src) {
@@ -66,6 +72,12 @@ static void run() {
   }
 
   use_program(p);
+
+  auto b = create_buffer();
+  bind_buffer(array_buffer, b);
+  buffer_data(array_buffer, quad, sizeof(quad), static_draw);
+  enable_vertex_attrib_array(0);
+  vertex_attrib_array_pointer(0, 2, float_, false, 0, 0);
 }
 
 struct init {
