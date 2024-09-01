@@ -1,6 +1,7 @@
 #define IMPORT(r, n) extern r __attribute__((import_module("gelo"), import_name(#n))) n
 
 export module gelo;
+import jute;
 
 export namespace gelo {
   constexpr const auto ACTIVE_ATTRIBUTES = 35721;
@@ -332,4 +333,8 @@ export namespace gelo {
   IMPORT(int, use_program)(int prog);
   IMPORT(void, vertex_attrib_array_pointer)(int idx, int qty, int type, bool norm, int stride, int offset);
   IMPORT(void, viewport)(int x, int y, int w, int h);
+
+  int get_uniform_location(int prog, jute::view name) {
+    return get_uniform_location(prog, name.begin(), name.size());
+  }
 }
