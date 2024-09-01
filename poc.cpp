@@ -33,6 +33,7 @@ namespace gelo {
   IMPORT(int, create_program)();
   IMPORT(int, create_shader)(int type);
   IMPORT(int, create_texture)();
+  IMPORT(void, draw_arrays_instanced)(int mode, int first, int v_count, int i_count);
   IMPORT(void, enable)(int feat);
   IMPORT(void, enable_vertex_attrib_array)(int idx);
   IMPORT(void, get_program_info_log)(int prog, char * buf, unsigned sz);
@@ -73,6 +74,8 @@ static void draw(void *) {
   clear_color(0.1, 0.1, 0.2, 1);
   clear(COLOR_BUFFER_BIT);
   viewport(0, 0, casein::window_size.x, casein::window_size.y);
+
+  draw_arrays_instanced(TRIANGLES, 0, 6, 1);
 
   vaselin::request_animation_frame(draw, nullptr);
 }

@@ -23,6 +23,7 @@
     create_program : () => i(gl.createProgram()),
     create_shader : (t) => i(gl.createShader(t)),
     create_texture : () => i(gl.createTexture()),
+    draw_arrays_instanced : ext_ia.drawArraysInstancedANGLE.bind(ext_ia),
     enable : gl.enable.bind(gl),
     enable_vertex_attrib_array : gl.enableVertexAttribArray.bind(gl),
     get_program_info_log : (s, ptr, sz) => into(gl.getProgramInfoLog(b[s]), ptr, sz),
