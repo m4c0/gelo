@@ -16,6 +16,8 @@
     bind_texture : (t, n) => gl.bindTexture(t, b[n]),
     blend_func : gl.blendFunc.bind(gl),
     buffer_data : (t, ptr, sz, m) => gl.bufferData(t, vaselin_toarr(ptr, sz), m),
+    clear : gl.clear.bind(gl),
+    clear_color : gl.clearColor.bind(gl),
     compile_shader : (s) => gl.compileShader(b[s]),
     create_buffer : () => i(gl.createBuffer()),
     create_program : () => i(gl.createProgram()),
@@ -31,9 +33,11 @@
     link_program : (p) => gl.linkProgram(b[p]),
     shader_source : (s, ptr, sz) => gl.shaderSource(b[s], outo(ptr, sz)),
     tex_image_2d : (t, l, i, w, h, b, f, tp, ptr, sz) => gl.texImage2D(t, l, i, w, h, b, f, tp, vaselin_toarr(ptr, sz)),
+    tex_parameter_i : gl.texParameteri.bind(gl),
     uniform2f : gl.uniform2f.bind(gl),
     uniform2i : gl.uniform2i.bind(gl),
     use_program : (p) => gl.useProgram(b[p]),
     vertex_attrib_array_pointer : gl.vertexAttribPointer.bind(gl),
+    viewport : gl.viewport.bind(gl),
   };
 }();

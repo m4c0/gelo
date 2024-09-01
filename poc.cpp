@@ -3,6 +3,7 @@ import casein;
 import gelo;
 import jute;
 import silog;
+import vaselin;
 
 using namespace jute::literals;
 
@@ -25,6 +26,8 @@ namespace gelo {
   IMPORT(void, bind_texture)(int type, int txt);
   IMPORT(void, blend_func)(int src, int dst);
   IMPORT(void, buffer_data)(int type, const void * ptr, unsigned sz, int mode);
+  IMPORT(void, clear)(int who);
+  IMPORT(void, clear_color)(float r, float g, float b, float a);
   IMPORT(void, compile_shader)(int shd);
   IMPORT(int, create_buffer)();
   IMPORT(int, create_program)();
@@ -39,11 +42,13 @@ namespace gelo {
   IMPORT(int, get_uniform_location)(int prog, const char * name, unsigned sz);
   IMPORT(int, link_program)(int prog);
   IMPORT(void, shader_source)(int shd, const char * src, unsigned sz);
+  IMPORT(void, tex_image_2d)(int t, int lvl, int i_fmt, int w, int h, int border, int fmt, int type, const void * data, int sz);
+  IMPORT(void, tex_parameter_i)(int t, int p, int v);
   IMPORT(int, uniform2f)(int u, float, float);
   IMPORT(int, uniform1i)(int u, int);
   IMPORT(int, use_program)(int prog);
-  IMPORT(void, tex_image_2d)(int t, int lvl, int i_fmt, int w, int h, int border, int fmt, int type, const void * data, int sz);
   IMPORT(void, vertex_attrib_array_pointer)(int idx, int qty, int type, bool norm, int stride, int offset);
+  IMPORT(void, viewport)(int x, int y, int w, int h);
 }
 
 static void shader(int prog, int type, jute::view src) {
@@ -60,10 +65,22 @@ static void shader(int prog, int type, jute::view src) {
   attach_shader(prog, v);
 }
 
+static int p, b, t;
+
+static void draw(void *) {
+  using namespace gelo;
+
+  clear_color(0.1, 0.1, 0.2, 1);
+  clear(COLOR_BUFFER_BIT);
+  viewport(0, 0, casein::window_size.x, casein::window_size.y);
+
+  vaselin::request_animation_frame(draw, nullptr);
+}
+
 static void run() {
   using namespace gelo;
 
-  auto p = create_program();
+  p = create_program();
   shader(p, VERTEX_SHADER, vert_shader);
   shader(p, FRAGMENT_SHADER, frag_shader);
 
@@ -76,7 +93,7 @@ static void run() {
 
   use_program(p);
 
-  auto b = create_buffer();
+  b = create_buffer();
   bind_buffer(ARRAY_BUFFER, b);
   buffer_data(ARRAY_BUFFER, quad, sizeof(quad), STATIC_DRAW);
   enable_vertex_attrib_array(0);
@@ -85,10 +102,16 @@ static void run() {
   enable(BLEND);
   blend_func(ONE, ONE_MINUS_SRC_ALPHA);
 
-  auto t = create_texture();
+  t = create_texture();
   active_texture(TEXTURE0);
   bind_texture(TEXTURE_2D, t);
   tex_image_2d(TEXTURE_2D, 0, RGBA, 1, 1, 0, RGBA, UNSIGNED_BYTE, text, sizeof(text));
+  tex_parameter_i(TEXTURE_2D, TEXTURE_WRAP_S, CLAMP_TO_EDGE);
+  tex_parameter_i(TEXTURE_2D, TEXTURE_WRAP_T, CLAMP_TO_EDGE);
+  tex_parameter_i(TEXTURE_2D, TEXTURE_MIN_FILTER, NEAREST);
+  tex_parameter_i(TEXTURE_2D, TEXTURE_MAG_FILTER, NEAREST);
+
+  vaselin::request_animation_frame(draw, nullptr);
 }
 
 struct init {
