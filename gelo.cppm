@@ -331,7 +331,7 @@ export namespace gelo {
   IMPORT(int, uniform2f)(int u, float, float);
   IMPORT(int, uniform1i)(int u, int);
   IMPORT(int, use_program)(int prog);
-  IMPORT(void, vertex_attrib_array_pointer)(int idx, int qty, int type, bool norm, int stride, int offset);
+  IMPORT(void, vertex_attrib_pointer)(int idx, int qty, int type, bool norm, int stride, int offset);
   IMPORT(void, viewport)(int x, int y, int w, int h);
 
   int get_uniform_location(int prog, jute::view name) {

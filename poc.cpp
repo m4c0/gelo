@@ -65,7 +65,7 @@ static void run() {
   bind_buffer(ARRAY_BUFFER, b);
   buffer_data(ARRAY_BUFFER, quad, sizeof(quad), STATIC_DRAW);
   enable_vertex_attrib_array(0);
-  vertex_attrib_array_pointer(0, 2, FLOAT, false, 0, 0);
+  vertex_attrib_pointer(0, 2, FLOAT, false, 0, 0);
 
   enable(BLEND);
   blend_func(ONE, ONE_MINUS_SRC_ALPHA);
