@@ -1,5 +1,6 @@
 #pragma leco app
 import casein;
+import gelo;
 import jute;
 import silog;
 
@@ -17,14 +18,6 @@ static constexpr const auto frag_shader = R"(
 static constexpr const float quad[] { 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0 };
 
 namespace gelo {
-  constexpr const auto array_buffer = 34962;
-  constexpr const auto compile_status = 35713;
-  constexpr const auto fragment_shader = 35632;
-  constexpr const auto float_ = 5126;
-  constexpr const auto link_status = 35714;
-  constexpr const auto static_draw = 35044;
-  constexpr const auto vertex_shader = 35633;
-
   IMPORT(void, attach_shader)(int prog, int shd);
   IMPORT(void, bind_buffer)(int type, int buf);
   IMPORT(void, buffer_data)(int type, const void * ptr, unsigned sz, int mode);
@@ -49,7 +42,7 @@ static void shader(int prog, int type, jute::view src) {
   auto v = create_shader(type);
   shader_source(v, src.begin(), src.size());
   compile_shader(v);
-  if (!get_shader_parameter_b(v, compile_status)) {
+  if (!get_shader_parameter_b(v, COMPILE_STATUS)) {
     char buf[1024] {};
     get_shader_info_log(v, buf, sizeof(buf) - 1);
     silog::log(silog::error, "Error compiling shader:\n%s", buf);
@@ -61,11 +54,11 @@ static void run() {
   using namespace gelo;
 
   auto p = create_program();
-  shader(p, vertex_shader, vert_shader);
-  shader(p, fragment_shader, frag_shader);
+  shader(p, VERTEX_SHADER, vert_shader);
+  shader(p, FRAGMENT_SHADER, frag_shader);
 
   link_program(p);
-  if (!get_program_parameter_b(p, link_status)) {
+  if (!get_program_parameter_b(p, LINK_STATUS)) {
     char buf[1024] {};
     get_program_info_log(p, buf, sizeof(buf) - 1);
     silog::log(silog::error, "Error linking program:\n%s", buf);
@@ -74,10 +67,10 @@ static void run() {
   use_program(p);
 
   auto b = create_buffer();
-  bind_buffer(array_buffer, b);
-  buffer_data(array_buffer, quad, sizeof(quad), static_draw);
+  bind_buffer(ARRAY_BUFFER, b);
+  buffer_data(ARRAY_BUFFER, quad, sizeof(quad), STATIC_DRAW);
   enable_vertex_attrib_array(0);
-  vertex_attrib_array_pointer(0, 2, float_, false, 0, 0);
+  vertex_attrib_array_pointer(0, 2, FLOAT, false, 0, 0);
 }
 
 struct init {
