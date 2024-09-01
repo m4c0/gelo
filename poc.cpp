@@ -16,9 +16,12 @@ static constexpr const auto frag_shader = R"(
 )"_s;
 
 namespace gelo {
+  constexpr const auto array_buffer = 34962;
   constexpr const auto compile_status = 35713;
   constexpr const auto fragment_shader = 35632;
+  constexpr const auto float_ = 5126;
   constexpr const auto link_status = 35714;
+  constexpr const auto static_draw = 35044;
   constexpr const auto vertex_shader = 35633;
 
   IMPORT(void, attach_shader)(int prog, int shd);
