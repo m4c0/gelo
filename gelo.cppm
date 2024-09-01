@@ -324,13 +324,13 @@ export namespace gelo {
   IMPORT(void, get_shader_info_log)(int shd, char * buf, unsigned sz);
   IMPORT(bool, get_shader_parameter_b)(int shd, int n);
   IMPORT(int, get_uniform_location)(int prog, const char * name, unsigned sz);
-  IMPORT(int, link_program)(int prog);
+  IMPORT(void, link_program)(int prog);
   IMPORT(void, shader_source)(int shd, const char * src, unsigned sz);
   IMPORT(void, tex_image_2d)(int t, int lvl, int i_fmt, int w, int h, int border, int fmt, int type, const void * data, int sz);
   IMPORT(void, tex_parameter_i)(int t, int p, int v);
-  IMPORT(int, uniform2f)(int u, float, float);
-  IMPORT(int, uniform1i)(int u, int);
-  IMPORT(int, use_program)(int prog);
+  IMPORT(void, uniform1i)(int u, int);
+  IMPORT(void, uniform2f)(int u, float, float);
+  IMPORT(void, use_program)(int prog);
   IMPORT(void, vertex_attrib_divisor)(int idx, int div);
   IMPORT(void, vertex_attrib_pointer)(int idx, int qty, int type, bool norm, int stride, int offset);
   IMPORT(void, viewport)(int x, int y, int w, int h);
