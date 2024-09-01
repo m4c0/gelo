@@ -36,6 +36,7 @@
     tex_image_2d : (t, l, i, w, h, b, f, tp, ptr, sz) => gl.texImage2D(t, l, i, w, h, b, f, tp, vaselin_toarr(ptr, sz)),
     tex_parameter_i : gl.texParameteri.bind(gl),
     uniform2f : (u, a, b) => gl.uniform2f(b[u], a, b),
+    uniform1i : (u, a) => gl.uniform1i(b[u], a),
     uniform2i : (u, a, b) => gl.uniform2i(b[u], a, b),
     use_program : (p) => gl.useProgram(b[p]),
     vertex_attrib_divisor : ext_ia.vertexAttribDivisorANGLE.bind(ext_ia),
