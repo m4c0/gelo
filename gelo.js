@@ -1,7 +1,6 @@
 !function() {
   const canvas = document.getElementById("casein-canvas");
   const gl = canvas.getContext("webgl2");
-  const ext_ia = gl.getExtension("ANGLE_instanced_arrays");
 
   var b = [ null ];
   function i(who) { return b.push(who) - 1; }
@@ -23,7 +22,7 @@
     create_program : () => i(gl.createProgram()),
     create_shader : (t) => i(gl.createShader(t)),
     create_texture : () => i(gl.createTexture()),
-    draw_arrays_instanced : ext_ia.drawArraysInstancedANGLE.bind(ext_ia),
+    draw_arrays_instanced : gl.drawArraysInstanced.bind(gl),
     enable : gl.enable.bind(gl),
     enable_vertex_attrib_array : gl.enableVertexAttribArray.bind(gl),
     get_program_info_log : (s, ptr, sz) => into(gl.getProgramInfoLog(b[s]), ptr, sz),
@@ -39,7 +38,7 @@
     uniform2f : (u, x, y) => gl.uniform2f(b[u], x, y),
     uniform2i : (u, x, y) => gl.uniform2i(b[u], x, y),
     use_program : (p) => gl.useProgram(b[p]),
-    vertex_attrib_divisor : ext_ia.vertexAttribDivisorANGLE.bind(ext_ia),
+    vertex_attrib_divisor : gl.vertexAttribDivisor.bind(gl),
     vertex_attrib_pointer : gl.vertexAttribPointer.bind(gl),
     viewport : gl.viewport.bind(gl),
   };
