@@ -1,6 +1,6 @@
 !function() {
   const canvas = document.getElementById("casein-canvas");
-  const gl = canvas.getContext("webgl");
+  const gl = canvas.getContext("webgl2");
   const ext_ia = gl.getExtension("ANGLE_instanced_arrays");
 
   var b = [ null ];
