@@ -40,6 +40,7 @@
     use_program : (p) => gl.useProgram(b[p]),
     vertex_attrib_divisor : gl.vertexAttribDivisor.bind(gl),
     vertex_attrib_pointer : gl.vertexAttribPointer.bind(gl),
+    vertex_attrib_i_pointer : gl.vertexAttribIPointer.bind(gl),
     viewport : gl.viewport.bind(gl),
   };
 }();
