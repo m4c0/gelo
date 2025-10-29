@@ -329,6 +329,8 @@ export namespace gelo {
   IMPORT(void, tex_image_2d)(int t, int lvl, int i_fmt, int w, int h, int border, int fmt, int type, const void * data, int sz);
   IMPORT(void, tex_parameter_i)(int t, int p, int v);
   IMPORT(void, uniform1i)(int u, int);
+  IMPORT(void, uniform1f)(int u, float);
+  IMPORT(void, uniform2i)(int u, int, int);
   IMPORT(void, uniform2f)(int u, float, float);
   IMPORT(void, use_program)(int prog);
   IMPORT(void, vertex_attrib_divisor)(int idx, int div);

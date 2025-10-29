@@ -35,6 +35,7 @@
     tex_image_2d : (t, l, i, w, h, b, f, tp, ptr, sz) => gl.texImage2D(t, l, i, w, h, b, f, tp, vaselin_toarr(ptr, sz)),
     tex_parameter_i : gl.texParameteri.bind(gl),
     uniform1i : (u, x) => gl.uniform1i(b[u], x),
+    uniform1f : (u, x) => gl.uniform1f(b[u], x),
     uniform2f : (u, x, y) => gl.uniform2f(b[u], x, y),
     uniform2i : (u, x, y) => gl.uniform2i(b[u], x, y),
     use_program : (p) => gl.useProgram(b[p]),
