@@ -279,6 +279,7 @@ export namespace gelo {
   constexpr const auto TRIANGLES = 4;
   constexpr const auto TRIANGLE_FAN = 6;
   constexpr const auto TRIANGLE_STRIP = 5;
+  constexpr const auto UNIFORM_BUFFER = 35345;
   constexpr const auto UNPACK_ALIGNMENT = 3317;
   constexpr const auto UNPACK_COLORSPACE_CONVERSION_WEBGL = 37443;
   constexpr const auto UNPACK_FLIP_Y_WEBGL = 37440;
