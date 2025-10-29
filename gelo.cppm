@@ -307,6 +307,7 @@ export namespace gelo {
   IMPORT(void, active_texture)(int id);
   IMPORT(void, attach_shader)(int prog, int shd);
   IMPORT(void, bind_buffer)(int type, int buf);
+  IMPORT(void, bind_buffer_base)(int type, int idx, int buf);
   IMPORT(void, bind_texture)(int type, int txt);
   IMPORT(void, blend_func)(int src, int dst);
   IMPORT(void, buffer_data)(int type, const void * ptr, unsigned sz, int mode);

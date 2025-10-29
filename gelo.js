@@ -12,6 +12,7 @@
     active_texture : gl.activeTexture.bind(gl),
     attach_shader : (p, s) => gl.attachShader(b[p], b[s]),
     bind_buffer : (t, n) => gl.bindBuffer(t, b[n]),
+    bind_buffer_base : (t, o, n) => gl.bindBufferBase(t, o, b[n]),
     bind_texture : (t, n) => gl.bindTexture(t, b[n]),
     blend_func : gl.blendFunc.bind(gl),
     buffer_data : (t, ptr, sz, m) => gl.bufferData(t, vaselin_toarr(ptr, sz), m),
