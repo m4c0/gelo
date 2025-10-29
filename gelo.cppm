@@ -340,6 +340,9 @@ export namespace gelo {
   IMPORT(void, vertex_attrib_i_pointer)(int idx, int qty, int type, int stride, int offset);
   IMPORT(void, viewport)(int x, int y, int w, int h);
 
+  int get_uniform_block_index(int prog, jute::view name) {
+    return get_uniform_block_index(prog, name.begin(), name.size());
+  }
   int get_uniform_location(int prog, jute::view name) {
     return get_uniform_location(prog, name.begin(), name.size());
   }
