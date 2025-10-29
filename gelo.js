@@ -29,6 +29,7 @@
     get_program_parameter_b : (s, n) => !!gl.getProgramParameter(b[s], n),
     get_shader_info_log : (s, ptr, sz) => into(gl.getShaderInfoLog(b[s]), ptr, sz),
     get_shader_parameter_b : (s, n) => !!gl.getShaderParameter(b[s], n),
+    get_uniform_block_index : (p, ptr, sz) => gl.getUniformBlockIndex(b[p], outo(ptr, sz)),
     get_uniform_location : (p, ptr, sz) => i(gl.getUniformLocation(b[p], outo(ptr, sz))),
     link_program : (p) => gl.linkProgram(b[p]),
     shader_source : (s, ptr, sz) => gl.shaderSource(b[s], outo(ptr, sz)),

@@ -323,6 +323,7 @@ export namespace gelo {
   IMPORT(bool, get_program_parameter_b)(int prog, int n);
   IMPORT(void, get_shader_info_log)(int shd, char * buf, unsigned sz);
   IMPORT(bool, get_shader_parameter_b)(int shd, int n);
+  IMPORT(int, get_uniform_block_index)(int prog, const char * name, unsigned sz);
   IMPORT(int, get_uniform_location)(int prog, const char * name, unsigned sz);
   IMPORT(void, link_program)(int prog);
   IMPORT(void, shader_source)(int shd, const char * src, unsigned sz);
