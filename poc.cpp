@@ -12,7 +12,7 @@ static constexpr const auto vert_shader = R"(#version 300 es
     vec2 data;
   } _u;
   layout(location=0) in vec2 pos;
-  void main() { gl_Position = vec4(pos, 0, 1); }
+  void main() { gl_Position = vec4(pos * _u.data, 0, 1); }
 )"_s;
 static constexpr const auto frag_shader = R"(#version 300 es
   layout(location=0) out highp vec4 colour;
@@ -71,7 +71,7 @@ static void run() {
   enable_vertex_attrib_array(0);
   vertex_attrib_pointer(0, 2, FLOAT, false, 0, 0);
 
-  struct { float x, y; } uni;
+  struct { float x = 0.5, y = 0.5; } uni;
   u = create_buffer();
   auto up = get_uniform_block_index(p, "uni");
   bind_buffer_base(UNIFORM_BUFFER, up, u);
