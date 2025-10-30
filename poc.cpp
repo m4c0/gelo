@@ -7,12 +7,16 @@ import vaselin;
 
 using namespace jute::literals;
 
-static constexpr const auto vert_shader = R"(
-  attribute vec2 pos;
+static constexpr const auto vert_shader = R"(#version 300 es
+  layout(std140) uniform uni {
+    vec2 data;
+  } _u;
+  layout(location=0) in vec2 pos;
   void main() { gl_Position = vec4(pos, 0, 1); }
 )"_s;
-static constexpr const auto frag_shader = R"(
-  void main() { gl_FragColor = vec4(0.1, 0.2, 0.3, 1.0); }
+static constexpr const auto frag_shader = R"(#version 300 es
+  layout(location=0) out highp vec4 colour;
+  void main() { colour = vec4(0.1, 0.2, 0.3, 1.0); }
 )"_s;
 static constexpr const float quad[] { 1, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 0 };
 static constexpr const unsigned text[] { 0xFF00FFFF }; 
@@ -31,7 +35,7 @@ static void shader(int prog, int type, jute::view src) {
   attach_shader(prog, v);
 }
 
-static int p, b, t;
+static int p, b, u, t;
 
 static void draw(void *) {
   using namespace gelo;
@@ -66,6 +70,12 @@ static void run() {
   buffer_data(ARRAY_BUFFER, quad, sizeof(quad), STATIC_DRAW);
   enable_vertex_attrib_array(0);
   vertex_attrib_pointer(0, 2, FLOAT, false, 0, 0);
+
+  struct { float x, y; } uni;
+  u = create_buffer();
+  auto up = get_uniform_block_index(p, "uni");
+  bind_buffer_base(UNIFORM_BUFFER, up, u);
+  buffer_data(UNIFORM_BUFFER, &uni, sizeof(uni), STATIC_DRAW);
 
   enable(BLEND);
   blend_func(ONE, ONE_MINUS_SRC_ALPHA);
