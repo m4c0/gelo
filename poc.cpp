@@ -10,9 +10,14 @@ using namespace jute::literals;
 static constexpr const auto vert_shader = R"(#version 300 es
   layout(std140) uniform uni {
     vec2 data;
+    vec2 data2;
   } _u;
+  struct upc {
+    float a;
+  };
+  uniform upc _p;
   layout(location=0) in vec2 pos;
-  void main() { gl_Position = vec4(pos * _u.data, 0, 1); }
+  void main() { gl_Position = vec4(pos * _u.data * _p.a, 0, 1); }
 )"_s;
 static constexpr const auto frag_shader = R"(#version 300 es
   layout(location=0) out highp vec4 colour;
@@ -71,7 +76,7 @@ static void run() {
   enable_vertex_attrib_array(0);
   vertex_attrib_pointer(0, 2, FLOAT, false, 0, 0);
 
-  struct { float x = 0.5, y = 0.5; } uni;
+  struct { float x = 0.5, y = 0.5, z, w; } uni;
   u = create_buffer();
   auto up = get_uniform_block_index(p, "uni");
   bind_buffer_base(UNIFORM_BUFFER, up, u);
@@ -79,6 +84,8 @@ static void run() {
 
   enable(BLEND);
   blend_func(ONE, ONE_MINUS_SRC_ALPHA);
+
+  uniform1f(get_uniform_location(p, "_p.a"), 0.5);
 
   t = create_texture();
   active_texture(TEXTURE0);
