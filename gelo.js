@@ -41,6 +41,7 @@
     uniform1f : (u, x) => gl.uniform1f(b[u], x),
     uniform2f : (u, x, y) => gl.uniform2f(b[u], x, y),
     uniform2i : (u, x, y) => gl.uniform2i(b[u], x, y),
+    uniform4f : (u, x, y, z, w) => gl.uniform4f(b[u], x, y, z, w),
     use_program : (p) => gl.useProgram(b[p]),
     vertex_attrib_divisor : gl.vertexAttribDivisor.bind(gl),
     vertex_attrib_pointer : gl.vertexAttribPointer.bind(gl),

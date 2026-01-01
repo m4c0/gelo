@@ -1,6 +1,7 @@
 #define IMPORT(r, n) extern r __attribute__((import_module("gelo"), import_name(#n))) n
 
 export module gelo;
+import dotz;
 import jute;
 
 export namespace gelo {
@@ -335,6 +336,7 @@ export namespace gelo {
   IMPORT(void, uniform1f)(int u, float);
   IMPORT(void, uniform2i)(int u, int, int);
   IMPORT(void, uniform2f)(int u, float, float);
+  IMPORT(void, uniform4f)(int u, float, float, float, float);
   IMPORT(void, use_program)(int prog);
   IMPORT(void, vertex_attrib_divisor)(int idx, int div);
   IMPORT(void, vertex_attrib_pointer)(int idx, int qty, int type, bool norm, int stride, int offset);
@@ -347,4 +349,7 @@ export namespace gelo {
   int get_uniform_location(int prog, jute::view name) {
     return get_uniform_location(prog, name.begin(), name.size());
   }
+
+  void uniform2fv(int u, dotz::vec2 f) { uniform2f(u, f.x, f.y); }
+  void uniform4fv(int u, dotz::vec4 f) { uniform4f(u, f.x, f.y, f.z, f.w); }
 }
