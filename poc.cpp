@@ -99,6 +99,18 @@ static void run() {
   vaselin::request_animation_frame(draw, nullptr);
 }
 
-struct init {
-  init() { casein::handle(casein::CREATE_WINDOW, run); }
-} i;
+extern "C" void casein_init() {
+  using namespace casein;
+
+  handle(KEY_DOWN, K_F, [] {
+    fullscreen = !fullscreen;
+    interrupt(IRQ_FULLSCREEN);
+  });
+
+  handle(CREATE_WINDOW, run);
+  handle(RESIZE_WINDOW, [] {
+    silog::infof("window size: %fx%f", window_size.x, window_size.y);
+  });
+
+  window_size = { 100, 100 };
+}
