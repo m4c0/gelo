@@ -1,6 +1,7 @@
 #define IMPORT(r, n) extern r __attribute__((import_module("gelo"), import_name(#n))) n
 
 export module gelo;
+import casein; // TODO: enforce order in some other way
 import dotz;
 import jute;
 
