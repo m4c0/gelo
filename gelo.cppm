@@ -319,6 +319,7 @@ export namespace gelo {
   IMPORT(int, create_program)();
   IMPORT(int, create_shader)(int type);
   IMPORT(int, create_texture)();
+  IMPORT(void, draw_arrays)(int mode, int first, int count);
   IMPORT(void, draw_arrays_instanced)(int mode, int first, int v_count, int i_count);
   IMPORT(void, enable)(int feat);
   IMPORT(void, enable_vertex_attrib_array)(int idx);

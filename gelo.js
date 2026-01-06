@@ -24,6 +24,7 @@
     create_program : () => i(gl.createProgram()),
     create_shader : (t) => i(gl.createShader(t)),
     create_texture : () => i(gl.createTexture()),
+    draw_arrays : gl.drawArrays.bind(gl),
     draw_arrays_instanced : gl.drawArraysInstanced.bind(gl),
     enable : gl.enable.bind(gl),
     enable_vertex_attrib_array : gl.enableVertexAttribArray.bind(gl),
