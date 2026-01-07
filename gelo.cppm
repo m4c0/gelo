@@ -315,11 +315,13 @@ export namespace gelo {
   IMPORT(void, buffer_data)(int type, const void * ptr, unsigned sz, int mode);
   IMPORT(void, clear)(int who);
   IMPORT(void, clear_color)(float r, float g, float b, float a);
+  IMPORT(void, clear_depth)(float d);
   IMPORT(void, compile_shader)(int shd);
   IMPORT(int, create_buffer)();
   IMPORT(int, create_program)();
   IMPORT(int, create_shader)(int type);
   IMPORT(int, create_texture)();
+  IMPORT(void, depth_func)(int func);
   IMPORT(void, draw_arrays)(int mode, int first, int count);
   IMPORT(void, draw_arrays_instanced)(int mode, int first, int v_count, int i_count);
   IMPORT(void, enable)(int feat);
